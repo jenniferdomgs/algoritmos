@@ -1,0 +1,36 @@
+# include <chrono>
+# include <iostream>
+
+bool prime(long long n) {
+    int qty_divs = 0;
+    for(long long d = 1; d <= n; d++) {
+        if(n % d == 0) {
+            qty_divs = qty_divs + 1;
+        }
+    }
+    return qty_divs == 2;
+}
+
+int main() {
+    long long n;
+    std::cin >> n;
+
+    // início do cronômetro
+    auto beg = std::chrono::high_resolution_clock::now();
+    bool p = prime(n);
+
+    // fim do cronômetro
+    auto end = std::chrono::high_resolution_clock::now();
+
+    if(p) {
+        std::cout << n << " is prime" << std::endl;
+    } else {
+        std::cout << n << " is not prime" << std::endl;
+    }
+
+    auto dur = end - beg; // duração do cronômetro
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(dur).count();
+    std::cerr << n << " Processing time: " << duration << " microsecond(s)" << std::endl;
+    return 0;
+
+}

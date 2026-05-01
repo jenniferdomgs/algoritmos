@@ -1,1 +1,58 @@
-/.vscode
+# Executáveis
+*.exe
+*.out
+*.app
+a.out
+
+# Arquivos objeto e linkagem
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+
+# Debug e análise
+*.pdb
+*.ilk
+*.map
+*.exp
+
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+
+
+# VS Code
+.vscode/
+
+# Code::Blocks
+*.layout
+*.depend
+*.cbp
+
+# Dev-C++
+*.dev
+
+
+# CLion / JetBrains
+.idea/
+cmake-build-*/
+
+
+# Visual Studio
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+Debug/
+Release/
+x64/
+x86/
+ipch/
+.vs/

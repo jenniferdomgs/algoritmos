@@ -4,6 +4,10 @@
 *.app
 a.out
 
+# Executáveis sem extensão
+bin/*
+!bin/.gitkeep
+
 # Arquivos objeto e linkagem
 *.o
 *.obj

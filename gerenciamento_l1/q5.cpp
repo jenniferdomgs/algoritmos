@@ -159,17 +159,17 @@ class vector {
         // contar quantos elementos comuns 2 vetores têm
         unsigned int contar_comuns(const vector &other) {
             unsigned int cont = 0;
-            for (int i = 0; i < this->size_; i++) {
-                int atual = this->data[i];
-                for (int j = 0; i < (int)other.size_; j++) {
+            for (int i = 0; i < this->size_; i++) { // tamanho do primeiro vetor == O(n)
+                int atual = this->data[i]; 
+                for (int j = 0; j < (int)other.size_; j++) { // tamanho do segundo vetor == O(m)
                     if (other.data[j] == atual) {
                         cont++;
                         break;
                     }
                 }
-            }
+            } 
             return cont;
-        }
+        } // desempenho O(n*m)
 
 };
 

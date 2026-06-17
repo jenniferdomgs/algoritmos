@@ -93,10 +93,27 @@ class ll_int {
         }
         
         int size() {
-            
+            int cont = 0;
+            ll_int_node *current = this->first;
+            while (current != nullptr) { // n
+                cont += 1;
+                current = current->next;
+            }
+            return cont;
+        }
+
+        int get_at(int index) {
+            if (index < 0 || index >= size()) { // 1
+                return;
+            } 
+            for (int i = 0; i < size(); i++) { // tamaho da lista == n
+                if (i == index) {
+                    return this->value;
+                }
+            }
         }
 };
 
 int main() {
-
+    
 }

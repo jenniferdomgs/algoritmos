@@ -5,6 +5,20 @@ class vector {
         int *data;
         unsigned int size_, capacity_;
 
+        int size_reduzido() {
+            if (this->size_ < this->capacity_ / 4) { // 1
+                unsigned int new_capacity = this->capacity_ / 2;
+
+                int *new_data = new int[new_capacity];
+                for (unsigned int i = 0; i < size_; i++) { // O(n)
+                    new_data[i] = this->data[i];
+                }
+                delete[] data;
+                data = new_data;
+                this->capacity_ = new_capacity;
+            }
+        }
+
     public:
         // construtor
         vector() {
@@ -74,7 +88,10 @@ class vector {
                 return -1; 
             }
             this->size_--;
-            return this->data[this->size_]; // último elemento
+            int value = this->data[this->size_]; // último elemento
+            size_reduzido();
+
+            return value;
         }
 
         // remove o primeiro e retorna (-1 se a lista for vazia)
@@ -84,6 +101,7 @@ class vector {
             }
             int value = data[0];
             remove_at(0);
+
             return value;
         }
 
@@ -93,18 +111,12 @@ class vector {
                 if (this->data[i] == value) {
                     data[i] = data[i + 1];
                     size_--;
+                    size_reduzido();
+                    
                     return true;
                 }
             } 
             return false;
-        }
-
-        unsigned int size() {
-            return this->size_;
-        }
-
-        unsigned int capacity() {
-            return this->capacity_;  
         }
 
         // remove o elemento pelo indice, desloca os demais para esquerda e atualiza o tamanho 
@@ -116,6 +128,8 @@ class vector {
                 data[i] = data[i + 1];
             }
             size_--;
+            size_reduzido();
+
             return true;
         }
 
@@ -154,5 +168,12 @@ class vector {
             this->size_ = 0;
         }
 
+        unsigned int size() {
+            return this->size_;
+        }
+
+        unsigned int capacity() {
+            return this->capacity_;  
+        }
 
 };

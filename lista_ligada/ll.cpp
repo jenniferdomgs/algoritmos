@@ -14,6 +14,7 @@ class ll_int {
         ll_int() {
             this->first = nullptr;
             this->last = nullptr;
+            this->size_ = 0;
         }
 
         ~ll_int() {
@@ -43,6 +44,7 @@ class ll_int {
                 this->last->next = new_node;
             }
             this->last = new_node;
+            this->size_++;
         }
 
         void pop_front() {
@@ -55,6 +57,7 @@ class ll_int {
                 this->last = nullptr;
             }
             delete to_remove; 
+            this->size_--;
         }
 
         void pop_back() {
@@ -74,6 +77,7 @@ class ll_int {
             current->next = nullptr;
             delete this->last;
             this->last = current;
+            this->size_--;
         }
 
         int front() {
@@ -121,6 +125,7 @@ class ll_int {
                 current = current->next;
             }
             return current->value; 
+            this->size_++;
         }
 
         void set_at(int i, int value) {
@@ -135,5 +140,10 @@ class ll_int {
                 }
             }
             current->value = value; 
+            this->size_++;
+        }
+
+        bool remove(int value) {
+
         }
     };

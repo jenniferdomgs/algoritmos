@@ -8,6 +8,7 @@ class ll_int {
         };
 
         ll_int_node *first, *last;
+        unsigned int size_;
 
     public:
         ll_int() {
@@ -25,10 +26,11 @@ class ll_int {
             ll_int_node *new_node = new ll_int_node;
             new_node->value = value;
             new_node->next = this->first;  
-            this->first = new_node;
             if (this->last == nullptr) {
                 this->last = new_node;
             }
+            this->first = new_node;
+            this->size_++;
         }
 
         void push_back(int value) {

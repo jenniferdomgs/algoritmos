@@ -134,4 +134,24 @@ class ll_int {
             }
             current->value = value; 
         }
+
+        void insert_after(int x, int value) {
+            ll_int_node *current = this->first;
+            while (current != nullptr) {
+                if (current->value == x) {
+                    ll_int_node *new_node = new ll_int_node;
+                    new_node->value = value;
+                    new_node->next = current->next; 
+                    current->next = new_node;      
+
+                    if (current == this->last) {
+                        this->last = new_node;
+                    }
+                    return;
+                }
+                current = current->next;
+            }
+
+            push_back(value); // se não tem x, add ao fim 
+        }
     };

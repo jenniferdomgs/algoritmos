@@ -171,7 +171,7 @@ class vector {
             return cont;
         }
 
-        void push_back_vector(const vector &other) {
+        void push_back_vector(const vector &other) { // incompleta
             if (this->size_ == this->capacity_) {
                 return;
             }

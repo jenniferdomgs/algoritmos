@@ -1,11 +1,13 @@
-# include <iostream>
+#include <iostream>
 
 class ll_int {
     private:
         struct ll_int_node {
             int value;
-            struct ll_int *next;
+            ll_int_node *next;  
         };
+
+        ll_int_node *first, *last;
 
     public:
         ll_int() {
@@ -13,16 +15,20 @@ class ll_int {
             this->last = nullptr;
         }
 
+        ~ll_int() {
+            while (this->first != nullptr) {
+                this->pop_front();
+            }
+        }
+
         void push_front(int value) {
             ll_int_node *new_node = new ll_int_node;
             new_node->value = value;
-            new_node->next = nullptr;
-            if (this->first == nullptr) {
-                this->first = new_node;
-            } else {
-                this->last->next = new_node;
+            new_node->next = this->first;  
+            this->first = new_node;
+            if (this->last == nullptr) {
+                this->last = new_node;
             }
-            this->last = new_node;
         }
 
         void push_back(int value) {
@@ -38,14 +44,15 @@ class ll_int {
         }
 
         void pop_front() {
-            if (this->firt == nullptr) {
+            if (this->first == nullptr) {  
                 return;
             }
             ll_int_node *to_remove = this->first;
-            if (this->last == this->first) {
+            this->first = this->first->next;  
+            if (this->first == nullptr) {
                 this->last = nullptr;
-                this->first = nullptr;
             }
+            delete to_remove; 
         }
 
         void pop_back() {
@@ -56,6 +63,7 @@ class ll_int {
                 delete this->first;
                 this->first = nullptr;
                 this->last = nullptr;
+                return; 
             }
             ll_int_node *current = this->first;
             while (current->next != this->last) {
@@ -64,11 +72,11 @@ class ll_int {
             current->next = nullptr;
             delete this->last;
             this->last = current;
-            }
-        
+        }
+
         int front() {
             if (this->first != nullptr) {
-                return this->last->value;
+                return this->first->value;  
             } else {
                 return -1;
             }
@@ -85,17 +93,17 @@ class ll_int {
         int sum() {
             int ans = 0;
             ll_int_node *current = this->first;
-            while (current != 0) {
+            while (current != nullptr) {
                 ans += current->value;
                 current = current->next;
             }
             return ans;
         }
-        
+
         int size() {
             int cont = 0;
             ll_int_node *current = this->first;
-            while (current != nullptr) { // n
+            while (current != nullptr) { // O(n) : percorre todos os nós 
                 cont += 1;
                 current = current->next;
             }
@@ -103,17 +111,27 @@ class ll_int {
         }
 
         int get_at(int index) {
-            if (index < 0 || index >= size()) { // 1
+            if (index < 0 || index >= size()) { // O(n) : size
+                return -1;  
+            }
+            ll_int_node *current = this->first;  
+            for (int i = 0; i < index; i++) { // O(n) : percorre tudo de novo
+                current = current->next;
+            }
+            return current->value; 
+        }
+
+        void set_at(int i, int value) {
+            if (this->first == nullptr) {
                 return;
-            } 
-            for (int i = 0; i < size(); i++) { // tamaho da lista == n
-                if (i == index) {
-                    return this->value;
+            }
+            ll_int_node *current = this->first;
+            for (int j = 0; j < i; j++) { // O(n) : percorre até indice
+                current = current->next;
+                if (current == nullptr) {
+                    return;
                 }
             }
+            current->value = value; 
         }
-};
-
-int main() {
-    
-}
+    };

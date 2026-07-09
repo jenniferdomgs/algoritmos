@@ -4,25 +4,25 @@ using namespace std;
 const int N = 20;
 const int M = 20;
 
-bool caminhoValido(int lab[N][M], int linhas, int colunas, int l, int c) {
+int caminhoValido(int lab[N][M], int linhas, int colunas, int l, int c) {
     if (l < 0 || c < 0 || l >= linhas || c >= colunas || lab[l][c] == 1) {
-        return false;
+        return 0;
     }
 
     if (l == linhas - 1 && c == colunas - 1) {
-        return true;
+        return 1;
     }
 
     lab[l][c] = 1; // marcando p/ dizer que visitou
 
-    bool existeCaminho = caminhoValido(lab, linhas, colunas, l+1, c) || // para baixo
-                            caminhoValido(lab, linhas, colunas, l-1, c) || // para cima
-                            caminhoValido(lab, linhas, colunas, l, c+1) || // para direita
+    int qttdCaminho = caminhoValido(lab, linhas, colunas, l+1, c) + // para baixo
+                            caminhoValido(lab, linhas, colunas, l-1, c) + // para cima
+                            caminhoValido(lab, linhas, colunas, l, c+1) + // para direita
                             caminhoValido(lab, linhas, colunas, l, c-1); // para esquerda
 
     lab[l][c] = 0; 
 
-    return existeCaminho;
+    return qttdCaminho;
 }
 
 int main() {
@@ -41,7 +41,7 @@ int main() {
         }
     }
 
-    bool resultado = caminhoValido(lab, linhas, colunas, 0, 0);
+    int resultado = caminhoValido(lab, linhas, colunas, 0, 0);
     cout << resultado << endl;
 
     return 0;

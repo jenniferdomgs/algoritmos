@@ -13,6 +13,7 @@ void ordenacao_insercao(vector<int>& lista, int n) {
     for (int i = 1; i < n; i++) { // n
         int chave = lista[i];
         int j = i-1;
+        
         while (j >= 0 && lista[j] > chave) { // i (vai de 1 até n-1) == O(n-1)
             lista[j + 1] = lista[j];
             j--;
